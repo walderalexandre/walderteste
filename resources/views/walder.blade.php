@@ -32,7 +32,7 @@ $(document).ready(function(){
         $("#especialidade").change(function(){
           if ($(this).val() != 'false' ) {
             $.ajax({
-                url: "{{ url('/retornaProfissional') }}" ,
+                url: "{{ url('/retornaProfissionalPorEspecialidade') }}" ,
                 method: 'GET',
                 data: {especialidade_id : $(this).val()},
                 success: function(data) {

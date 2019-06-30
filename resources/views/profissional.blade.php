@@ -12,7 +12,7 @@
               <p class="card-text"> {{$resp->conselho}} - {{$resp->documento_conselho}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Agendar</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onClick="window,location.href='agendar/{{$resp->profissional_id}}/{{$especialidade_id}}'">Agendar</button>
                 </div>
                 <small class="text-muted">{{$resp->profissional_id}}</small>
               </div>
@@ -26,6 +26,3 @@
 		</div>
     </div>
   </div>
-  
-  
-  

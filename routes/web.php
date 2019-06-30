@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('walder');
 });
 
-Route::get('/', 'WalderController@index');
+Route::get('/', 'WalderController@listaEspecialidade');
 Route::get('testeapi', 'WalderController@testeAPI');
 Route::get('especialidade','WalderController@listaEspecialidade');
-Route::get('retornaProfissional','WalderController@retornaProfissional');
+Route::get('retornaProfissionalPorEspecialidade','WalderController@retornaProfissionalPorEspecialidade');
+Route::get('agendar/{profissional_id}/{especialidade_id}','AgendarController@show');
+Route::get('agendar','WalderController@listaEspecialidade');

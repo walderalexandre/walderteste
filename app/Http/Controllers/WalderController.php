@@ -8,14 +8,13 @@ use GuzzleHttp\Client;
 
 class WalderController extends Controller
 {
-    
+    private $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38';
 
     public function testeAPI()
     {
         
-        
         $headers = [
-            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38'];
+            'x-access-token' => $this->token];
         $client = new Client();
         
         $res = $client->get('http://clinic5.feegow.com.br/components/public/api/company/list-unity',['headers' => $headers]);
@@ -36,41 +35,75 @@ class WalderController extends Controller
         return view('walder',['var' => $var]);
        
     }
-
-    public function listaEspecialidade()
-    {
+    /**
+     * 
+     * @param unknown $url
+     * @return unknown
+     */
+    private function restRequest($url){
+        
         $headers = [
-            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38'];
+            'x-access-token' => $this->token];
         $client = new Client();
         
-        $res = $client->get('http://clinic5.feegow.com.br/components/public/api/specialties/list',['headers' => $headers]);
-        $response = $res->getBody()->getContents();
-       
-        $aff = json_decode($response);
+        try {
+        
+            $res = $client->get($url,['headers' => $headers]);
+    
+           // $code = $res->getStatusCode(); // 200  
+           // echo $res->getReasonPhrase(); die;// OK
+        
+        } catch (\Exception $e) {
+            
+            
+           // view('mensagem',['codigo' => $e->getCode()]);
+            
+            var_dump( $e->getCode());
+            exit;
 
+        }
+        
+        $response = $res->getBody()->getContents();
+        
+        $aff = json_decode($response);
+        
         $response = $aff->content;
+        
+        return $response;
+     
+    }
+
+    /**
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function listaEspecialidade()
+    {
+
+        $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/specialties/list');
+
         return view('walder',['response' => $response]);
     }
     
-    public function retornaProfissional(Request $especialidade){
+    /**
+     * 
+     * @param Request $especialidade
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function retornaProfissionalPorEspecialidade(Request $especialidade)
+    {
 
-        $especialidade = $especialidade->especialidade_id;
-        $headers = ['x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38'
-
-        ];
-        $client = new Client(['headers' => $headers]);
+        $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade->especialidade_id);
         
-        $res = $client->get('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade);
+        return view('profissional',['response' => $response, 'especialidade_id' => $especialidade->especialidade_id]);
         
-        $code = $res->getStatusCode(); // 200
-        $reason = $res->getReasonPhrase(); // OK
+    }
+    
+    public function retornaProfissionalPorId($id)
+    {
         
-        $response = $res->getBody()->getContents();
+        $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/search?profissional_id='.$id);
         
-        $aff = json_decode($response);
-        
-        $response = $aff->content;
-       // dd($response);
         return view('profissional',['response' => $response]);
         
     }
@@ -102,7 +135,7 @@ class WalderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showEspecifico($id)
     {
         //
     }
