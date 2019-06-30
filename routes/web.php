@@ -19,5 +19,5 @@ Route::get('/', 'WalderController@listaEspecialidade');
 Route::get('testeapi', 'WalderController@testeAPI');
 Route::get('especialidade','WalderController@listaEspecialidade');
 Route::get('retornaProfissionalPorEspecialidade','WalderController@retornaProfissionalPorEspecialidade');
-Route::get('agendar/{profissional_id}/{especialidade_id}','AgendarController@show');
-Route::get('agendar','WalderController@listaEspecialidade');
+Route::post('agendar','AgendarController@show');
+Route::post('confirmarAgendamento','AgendaController@store');

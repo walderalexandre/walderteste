@@ -43,17 +43,22 @@ class AgendarController extends WalderController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($profissional_id, $especialidade_id)
+    public function show(Request $request)
     {
-
-        $profissional = $this->retornaProfissionalPorId($profissional_id);
         
-        echo "<pre>";
+        //echo $request->inputEspecialidadeNome;
+       // dd ($request->inputProfissionalNome);
+        
+        //$profissional = $this->retornaProfissionalPorId($profissional_id);
+        
+        $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/patient/list-sources');
+
+        /**echo "<pre>";
         echo array_search($especialidade_id, $profissional->getData()['response']->especialidades);
         var_dump($profissional->getData()['response']->especialidades);
         echo "</pre>";
-        die;
-        return view('agendar',['profissional' => $profissional->getData()['response']->informacoes[0], 'especialidade_id' => $especialidade_id]);
+        die;*/
+        return view('agendar',['request' =>  $request, 'response' => $response]);
 
     }
 

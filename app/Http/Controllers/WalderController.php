@@ -40,7 +40,7 @@ class WalderController extends Controller
      * @param unknown $url
      * @return unknown
      */
-    private function restRequest($url){
+    public function restRequest($url){
         
         $headers = [
             'x-access-token' => $this->token];
