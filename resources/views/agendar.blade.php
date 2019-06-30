@@ -1,11 +1,20 @@
 @extends('base')
 
 @section('main')
+<div class="row">
+<div class="col-sm-8 offset-sm-2">
 
-
+<h5>Preencha seus dados</h5>
 {{$request->inputProfissionalNome}}
 {{$request->inputEspecialidadeNome}}
-<form>
+
+<form enctype="multipart/form-data" method="post" action="agendar" id="formAgendar">
+
+@csrf
+  <input type="hidden" name="inputEspecialidadeId" id="inputEspecialidadeNome" value="">
+  <input type="hidden" name="inputProfissionalId" id="inputProfissionalId" value="">
+  <input type="hidden" name="inputProfissionalNome" id="inputProfissionalNome" value="">
+
   <div class="form-row">
     <div class="form-group col-md-6">
       <input type="text" class="form-control" id="inputNome" placeholder="Nome completo">
@@ -37,7 +46,8 @@
   <button type="submit" class="btn btn-primary">Solicitar horários</button>
 </form>
 
-
+</div>
+</div>
 @endsection
 
 

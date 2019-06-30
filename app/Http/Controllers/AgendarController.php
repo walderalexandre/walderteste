@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Agendar;
 
-class AgendarController extends WalderController
+class AgendarController extends EspecialidadeController
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,10 @@ class AgendarController extends WalderController
      */
     public function store(Request $request)
     {
-        //
+     
+            $agendar = new Agendar(['specialty_id' => $request->get('especialidade_id')]);
+          //  $agendar->save();
+            
     }
 
     /**

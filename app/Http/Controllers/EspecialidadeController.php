@@ -6,23 +6,10 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
-class WalderController extends Controller
+class EspecialidadeController extends Controller
 {
     private $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38';
 
-    public function testeAPI()
-    {
-        
-        $headers = [
-            'x-access-token' => $this->token];
-        $client = new Client();
-        
-        $res = $client->get('http://clinic5.feegow.com.br/components/public/api/company/list-unity',['headers' => $headers]);
-        $response = $res->getBody()->getContents();
-      
-        dd($response);
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +19,7 @@ class WalderController extends Controller
     {
         //
         $var = ['a' => 'aqui!!!'];
-        return view('walder',['var' => $var]);
+        return view('especialidade',['var' => $var]);
        
     }
     /**
@@ -82,7 +69,7 @@ class WalderController extends Controller
 
         $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/specialties/list');
 
-        return view('walder',['response' => $response]);
+        return view('especialidade',['response' => $response]);
     }
     
     /**
@@ -95,7 +82,7 @@ class WalderController extends Controller
 
         $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade->especialidade_id);
         
-        return view('profissional',['response' => $response, 'especialidade_id' => $especialidade->especialidade_id]);
+        return view('profissional',['response' => $response, 'especialidade_id' => $especialidade->especialidade_id, 'total' => count($response)]);
         
     }
     

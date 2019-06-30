@@ -1,5 +1,6 @@
 <div class="album py-5 bg-light">
 <div class="container">
+<h5>Total encontrado {{$total}}</h5>
 	<div class="row">
 
 @foreach($response as $resp)
