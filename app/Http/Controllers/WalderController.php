@@ -32,9 +32,49 @@ class WalderController extends Controller
     public function index()
     {
         //
-        echo "aqui";
+        $var = ['a' => 'aqui!!!'];
+        return view('walder',['var' => $var]);
+       
     }
 
+    public function listaEspecialidade()
+    {
+        $headers = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38'];
+        $client = new Client();
+        
+        $res = $client->get('http://clinic5.feegow.com.br/components/public/api/specialties/list',['headers' => $headers]);
+        $response = $res->getBody()->getContents();
+       
+        $aff = json_decode($response);
+
+        $response = $aff->content;
+        return view('walder',['response' => $response]);
+    }
+    
+    public function retornaProfissional(Request $especialidade){
+
+        $especialidade = $especialidade->especialidade_id;
+        $headers = ['x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38'
+
+        ];
+        $client = new Client(['headers' => $headers]);
+        
+        $res = $client->get('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade);
+        
+        $code = $res->getStatusCode(); // 200
+        $reason = $res->getReasonPhrase(); // OK
+        
+        $response = $res->getBody()->getContents();
+        
+        $aff = json_decode($response);
+        
+        $response = $aff->content;
+       // dd($response);
+        return view('profissional',['response' => $response]);
+        
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
