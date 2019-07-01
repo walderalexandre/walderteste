@@ -8,7 +8,7 @@ use App\Agendar;
 class AgendarController extends EspecialidadeController
 {
     /**
-     * Display a listing of the resource.
+     * Índex do formulário
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class AgendarController extends EspecialidadeController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Salva os dados do formulário
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

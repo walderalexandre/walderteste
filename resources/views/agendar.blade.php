@@ -5,8 +5,8 @@
 <div class="col-sm-8 offset-sm-2">
 
 <h5>Preencha seus dados</h5>
-{{$request->inputProfissionalNome}} - 
-{{$request->inputEspecialidadeNome}}
+<h6>Profissional: {{$request->inputProfissionalNome}}</h6>
+<h6>Especialidade: {{$request->inputEspecialidadeNome}}</h6>
 
 <form enctype="multipart/form-data" method="post" onSubmit="return false" id="formAgendar">
 

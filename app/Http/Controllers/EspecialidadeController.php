@@ -41,7 +41,7 @@ class EspecialidadeController extends Controller
     }
 
     /**
-     * 
+     * Lista todas as especialidades disponíveis
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function listaEspecialidade()
@@ -53,7 +53,7 @@ class EspecialidadeController extends Controller
     }
     
     /**
-     * 
+     * Lista os profissicionais de acordo com a especialidade
      * @param Request $especialidade
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
@@ -63,20 +63,6 @@ class EspecialidadeController extends Controller
         $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade->especialidade_id);
            
         return view('profissional',['response' => $response, 'especialidade_id' => $especialidade->especialidade_id, 'total' => count($response)]);
-        
-    }
-    
-    /**
-     * 
-     * @param integer $id
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function retornaProfissionalPorId($id)
-    {
-        
-        $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/search?profissional_id='.$id);
-        
-        return view('profissional',['response' => $response]);
         
     }
     

@@ -1,0 +1,33 @@
+-----------------------------
+Teste Feegow por Walder Silva
+-----------------------------
+
+ESPECIFICAÇÕES DE INSTALAÇÃO
+----------------------------
+
+Laravel versão 2.1.0
+MySQL versão 10.3.16-MariaDB
+PHP versão 7.1.30
+
+INSTALAÇÃO
+----------
+
+- O projeto está disponível no Github através do endereço https://github.com/walderalexandre/walderteste.
+
+- O banco de dados está configurado, conforme arquivo .env (na raiz do projeto), da seguinte forma:
+
+(linas 12 a 14)
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+
+Caso haja necessidade, as linhas 13 e 14 podem ser alteradas.
+
+- Executar o arquivo de banco homestead.sql.
+
+- Rodar a aplicação através do endereço http://localhost/walderteste/public/ com as devidas alterações de acordo com a configuração do servidor.
+
+---------------------------------
+Contato walderalexandre@gmail.com
+---------------------------------
+
