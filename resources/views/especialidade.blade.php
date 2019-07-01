@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="col-sm-8 offset-sm-2">
-  <h1 class="display-5">Selecione a especialidade</h1>
+  <h5>Selecione a especialidade</h5>
   <form enctype="multipart/form-data" method="post" action="agendar" id="formAgendar">
   @csrf
   <input type="hidden" name="inputEspecialidadeNome" id="inputEspecialidadeNome" value="">
@@ -20,6 +20,8 @@
   </div>
   </form>
 </div>
+</div>
+<div id="profissional">
 </div>
 @endsection
 

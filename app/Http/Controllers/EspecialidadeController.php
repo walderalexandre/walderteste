@@ -10,18 +10,6 @@ class EspecialidadeController extends Controller
     private $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmZWVnb3ciLCJhdWQiOiJwdWJsaWNhcGkiLCJpYXQiOiIxNy0wOC0yMDE4IiwibGljZW5zZUlEIjoiMTA1In0.UnUQPWYchqzASfDpVUVyQY0BBW50tSQQfVilVuvFG38';
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        $var = ['a' => 'aqui!!!'];
-        return view('especialidade',['var' => $var]);
-       
-    }
-    /**
      * Função para requisitar dados via REST
      * @param string $url
      * @return mixed values
@@ -73,9 +61,7 @@ class EspecialidadeController extends Controller
     {
 
         $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/professional/list?especialidade_id='.$especialidade->especialidade_id);
-        
-        echo view('mensagem',['mensagem' => 'oi']);
-        
+           
         return view('profissional',['response' => $response, 'especialidade_id' => $especialidade->especialidade_id, 'total' => count($response)]);
         
     }

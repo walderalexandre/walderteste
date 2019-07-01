@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::get('/', 'EspecialidadeController@listaEspecialidade');
 Route::get('especialidade','EspecialidadeController@listaEspecialidade');
 Route::get('retornaProfissionalPorEspecialidade','EspecialidadeController@retornaProfissionalPorEspecialidade');
-Route::post('agendar','AgendarController@show');
+Route::post('agendar','AgendarController@index');
 Route::post('confirmarAgendamento','AgendarController@store');

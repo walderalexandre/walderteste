@@ -33,9 +33,7 @@
 </div>
 <div class="form-row">
 <div class="form-group col-md-6">
-
-<input class="form-control" type="date" value="" id="inputNascimento" name="inputNascimento" placeholder="Nascimento">
-
+<input type="text" class="form-control" id="inputNascimento" name="inputNascimento" placeholder="Nascimento""> 
 </div>
 <div class="form-group col-md-6">
 <input type="text" class="form-control" id="inputCPF" name="inputCPF" placeholder="CPF""> 
@@ -43,6 +41,7 @@
 </div>
   
 <button id="submitButton" type="submit" class="btn btn-primary" onClick="this.disabled=true;$('#formAgendar').submit()">Solicitar horários</button>
+<button id="voltar" type="reset" class="btn btn-secundary" onClick="window.location='especialidade'">Voltar</button>
 </form>
 
 </div>
@@ -58,6 +57,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	$("#inputCPF").mask("000.000.000-00");
+	$("#inputNascimento").mask("00/00/0000");
 
 	$('#formAgendar').on('submit', function (e) {
 
