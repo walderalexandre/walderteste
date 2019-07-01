@@ -35,9 +35,31 @@ class AgendarController extends EspecialidadeController
      */
     public function store(Request $request)
     {
-     
-            $agendar = new Agendar(['specialty_id' => $request->get('especialidade_id')]);
-          //  $agendar->save();
+        
+        dd($request);
+        
+       /**
+        $validar = $request->validate([
+            'specialty_id'=>'required',
+            'professional_id'=>'required',
+            'source_id'=>'required',
+            'name'=>'required',
+            'cpf'=>'required',
+            'birthdate'=>'required',
+        ]);
+        
+ */
+        
+        $agendar = new Agendar(['specialty_id' => $request->get('inputEspecialidadeId'),
+                                'professional_id' => $request->get('inputProfissionalId'),
+                                'source_id' => $request->get('inputOrigem'),
+                                'name' => $request->get('inputNome'),
+                                'cpf' => $request->get('inputCPF'),
+                                'birthdate' => $request->get('inputNascimento'),
+                                'date_time' => '2019-06-30 23:56'
+        ]);
+        
+        $agendar->save();
             
     }
 
@@ -49,19 +71,10 @@ class AgendarController extends EspecialidadeController
      */
     public function show(Request $request)
     {
-        
-        //echo $request->inputEspecialidadeNome;
-       // dd ($request->inputProfissionalNome);
-        
-        //$profissional = $this->retornaProfissionalPorId($profissional_id);
+      //  dd($request);
         
         $response = $this->restRequest('http://clinic5.feegow.com.br/components/public/api/patient/list-sources');
 
-        /**echo "<pre>";
-        echo array_search($especialidade_id, $profissional->getData()['response']->especialidades);
-        var_dump($profissional->getData()['response']->especialidades);
-        echo "</pre>";
-        die;*/
         return view('agendar',['request' =>  $request, 'response' => $response]);
 
     }
