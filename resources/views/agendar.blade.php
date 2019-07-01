@@ -61,7 +61,7 @@ $(document).ready(function(){
 	$("#inputCPF").mask("000.000.000-00");
 	$("#inputNascimento").mask("00/00/0000");
 
-	$("#formAgendar").validate({	
+	$("#formAgendar").validate({
 		messages : {
 			inputNome: {
 		    required: "Campo nome obrigatório"
@@ -80,7 +80,9 @@ $(document).ready(function(){
 	$('#formAgendar').on('submit', function (e) {
 
 		e.preventDefault(e);
+		
 		if ($("#formAgendar").valid()) {
+			
 		$.ajax({
 	        url: "confirmarAgendamento" ,
 	        method: 'POST',
@@ -95,6 +97,9 @@ $(document).ready(function(){
 		        $('#submitButton').attr("disabled", false);
 	        }
 	    });
+	    
+		} else {
+			$('#submitButton').attr("disabled", false);
 		}
 	});
 
