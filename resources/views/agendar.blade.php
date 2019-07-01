@@ -17,10 +17,10 @@
 
 <div class="form-row">
 <div class="form-group col-md-6">
-<input type="text" class="form-control" id="inputNome" name="inputNome" placeholder="Nome completo">
+<input type="text" class="form-control" id="inputNome" name="inputNome" maxlength="255" placeholder="Nome completo" required>
 </div>
 <div class="form-group col-md-6">
-<select id="inputOrigem" name="inputOrigem" class="form-control">
+<select id="inputOrigem" name="inputOrigem" class="form-control" required>
 <option value="">Como conheceu?</option>
 @foreach($response as $resp)
 
@@ -33,10 +33,10 @@
 </div>
 <div class="form-row">
 <div class="form-group col-md-6">
-<input type="text" class="form-control" id="inputNascimento" name="inputNascimento" placeholder="Nascimento""> 
+<input type="text" class="form-control" id="inputNascimento" name="inputNascimento" placeholder="Nascimento" required> 
 </div>
 <div class="form-group col-md-6">
-<input type="text" class="form-control" id="inputCPF" name="inputCPF" placeholder="CPF""> 
+<input type="text" class="form-control" id="inputCPF" name="inputCPF" placeholder="CPF" required > 
 </div>
 </div>
   
@@ -57,13 +57,30 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
 	$("#inputCPF").mask("000.000.000-00");
 	$("#inputNascimento").mask("00/00/0000");
 
+	$("#formAgendar").validate({	
+		messages : {
+			inputNome: {
+		    required: "Campo nome obrigatório"
+		 	},
+		 	inputNascimento: {
+				required: "Campo nascimento obrigatório" 
+		 	},
+		 	inputCPF: {
+				required: "Campo CPF obrigatório" 
+		 	},
+		 	inputOrigem: {
+				required: "Escolha uma opção" 
+		 	}
+	}});
+	
 	$('#formAgendar').on('submit', function (e) {
 
 		e.preventDefault(e);
-		
+		if ($("#formAgendar").valid()) {
 		$.ajax({
 	        url: "confirmarAgendamento" ,
 	        method: 'POST',
@@ -78,6 +95,7 @@ $(document).ready(function(){
 		        $('#submitButton').attr("disabled", false);
 	        }
 	    });
+		}
 	});
 
 });

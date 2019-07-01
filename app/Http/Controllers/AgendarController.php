@@ -28,11 +28,9 @@ class AgendarController extends EspecialidadeController
     public function store(Request $request)
     {
         $cpf = str_replace(['.','-'], '', $request->get('inputCPF'));
-        
-        dd($cpf);
 
         $verificaDuplicidade = Agendar::where('cpf', $cpf)->exists();
-        
+   
         if ($verificaDuplicidade) {
                        
             $retorno =  ['mensagem' => 'CPF já cadastrado'];
@@ -43,7 +41,7 @@ class AgendarController extends EspecialidadeController
                                     'professional_id' => $request->get('inputProfissionalId'),
                                     'source_id' => $request->get('inputOrigem'),
                                     'name' => $request->get('inputNome'),
-                                    'cpf' => $request->get('inputCPF'),
+                                    'cpf' => $cpf,
                                     'birthdate' => $request->get('inputNascimento'),
                                     'date_time' => '2019-06-30 23:56'
             ]);
