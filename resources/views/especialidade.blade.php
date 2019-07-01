@@ -21,8 +21,6 @@
   </form>
 </div>
 </div>
-<div id="profissional">
-</div>
 @endsection
 
 @section('scripts')

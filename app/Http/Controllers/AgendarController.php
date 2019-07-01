@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Exception;
 use App\Agendar;
 
 class AgendarController extends EspecialidadeController
@@ -35,32 +36,54 @@ class AgendarController extends EspecialidadeController
      */
     public function store(Request $request)
     {
+
+        $verificaDuplicidade = Agendar::where('cpf', $request->get('inputCPF'))->exists();
         
-        dd($request);
-        
-       /**
-        $validar = $request->validate([
-            'specialty_id'=>'required',
-            'professional_id'=>'required',
-            'source_id'=>'required',
-            'name'=>'required',
-            'cpf'=>'required',
-            'birthdate'=>'required',
-        ]);
-        
- */
-        
-        $agendar = new Agendar(['specialty_id' => $request->get('inputEspecialidadeId'),
-                                'professional_id' => $request->get('inputProfissionalId'),
-                                'source_id' => $request->get('inputOrigem'),
-                                'name' => $request->get('inputNome'),
-                                'cpf' => $request->get('inputCPF'),
-                                'birthdate' => $request->get('inputNascimento'),
-                                'date_time' => '2019-06-30 23:56'
-        ]);
-        
-        $agendar->save();
+        if ($verificaDuplicidade) {
+                       
+            $retorno =  ['mensagem' => 'CPF já cadastrado'];
+ 
+            return $retorno;
+          
+        } else {
+          
+            $agendar = new Agendar(['specialty_id' => $request->get('inputEspecialidadeId'),
+                                    'professional_id' => $request->get('inputProfissionalId'),
+                                    'source_id' => $request->get('inputOrigem'),
+                                    'name' => $request->get('inputNome'),
+                                    'cpf' => $request->get('inputCPF'),
+                                    'birthdate' => $request->get('inputNascimento'),
+                                    'date_time' => '2019-06-30 23:56'
+            ]);
             
+          //  try {
+                
+                $agendar->save();
+                echo view('mensagem',['mensagem' => 'Registro salvo com sucesso']);
+          //      return true;
+                
+                // $code = $res->getStatusCode(); // 200
+                // echo $res->getReasonPhrase(); die;// OK
+                
+          //  } catch (Exception $e) {
+                
+                
+                // view('mensagem',['codigo' => $e->getCode()]);
+                
+              //  var_dump( $e->getCode());
+                
+              //  echo view('mensagem',['mensagem' => 'Falha ao salvar o registro: '.$e->getCode()]);
+           //     return false;
+                
+           // }
+            /**
+            if ($agendar->save()) {
+                echo view('mensagem',['mensagem' => 'Registro salvo com sucesso']);
+            } else {
+                echo view('mensagem',['mensagem' => 'Falha ao salvar o registro']);
+            }
+                */
+        }
     }
 
     /**

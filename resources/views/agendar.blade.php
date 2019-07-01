@@ -47,6 +47,10 @@
 
 </div>
 </div>
+
+<div id="mensagem">
+
+</div>
 @endsection
 
 
@@ -64,10 +68,12 @@ $(document).ready(function(){
 	        method: 'POST',
 	        data: $('#formAgendar').serialize(),
 	        success: function(data) {
-	            alert('Sucesso');
+	        	$('#submitButton').attr("disabled", false);
+	            alert(data['mensagem']);
+		            
 	        },
 	        error: function(request, status, error){
-		        alert('Deu erro');
+	        	alert('Falha ao processar a requisição');
 		        $('#submitButton').attr("disabled", false);
 	        }
 	    });
