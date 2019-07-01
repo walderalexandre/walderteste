@@ -86,7 +86,7 @@ $(document).ready(function(){
 	        method: 'POST',
 	        data: $('#formAgendar').serialize(),
 	        success: function(data) {
-	        	$('#submitButton').attr("disabled", false);
+	        	$('#submitButton').attr("disabled", true);
 	            alert(data['mensagem']);
 		            
 	        },

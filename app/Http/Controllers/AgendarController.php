@@ -36,13 +36,16 @@ class AgendarController extends EspecialidadeController
             $retorno =  ['mensagem' => 'CPF já cadastrado'];
            
         } else {
+            
+            $birthdate = str_replace('/', '-', $request->get('inputNascimento'));
+            $birthdate = date('Y-m-d', strtotime($request->get('inputNascimento')));
           
             $agendar = new Agendar(['specialty_id' => $request->get('inputEspecialidadeId'),
                                     'professional_id' => $request->get('inputProfissionalId'),
                                     'source_id' => $request->get('inputOrigem'),
                                     'name' => $request->get('inputNome'),
                                     'cpf' => $cpf,
-                                    'birthdate' => $request->get('inputNascimento'),
+                                    'birthdate' => $birthdate,
                                     'date_time' => '2019-06-30 23:56'
             ]);
             
